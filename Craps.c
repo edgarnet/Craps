@@ -297,23 +297,23 @@ void chatter_messages(int number_rolls, int win_loss_neither, double initial_ban
 void print_dice(int die1_value, int die2_value){
 	switch(die1_value){
 		case 1: 
-						printf("\n   _______\n");
-						printf("  /\\ o  o \\\n");
-						printf(" /o \\ o  o \\\n");
-						printf("<    >------>\n");
-						printf(" \\ o/  o   /\n");
-						printf("  \\/______/\n");
-						break;
+			printf("\n   _______\n");
+			printf("  /\\ o  o \\\n");
+			printf(" /o \\ o  o \\\n");
+			printf("<    >------>\n");
+			printf(" \\ o/  o   /\n");
+			printf("  \\/______/\n");
+			break;
 		case 2:
-						printf("\n   _______\n");
-						printf("  /\\ o  o \\\n");
+			printf("\n   _______\n");
+			printf("  /\\ o  o \\\n");
                         printf(" /o \\ o  o \\\n");
                         printf("<  o >------>\n");
                         printf(" \\ o/ o  o /\n");
                         printf("  \\/______/\n");
                         break;
 		case 3:
-						printf("\n   _______\n");
+			printf("\n   _______\n");
                         printf("  /\\ o  o \\\n");
                         printf(" /  \\ o  o \\\n");
                         printf("<  o >------>\n");
@@ -321,7 +321,7 @@ void print_dice(int die1_value, int die2_value){
                         printf("  \\/______/\n");
                         break;
 		case 4:
-						printf("\n   _______\n");
+			printf("\n   _______\n");
                         printf("  /\\ o  o \\\n");
                         printf(" /o \\ o  o \\\n");
                         printf("<    >------>\n");
@@ -329,7 +329,7 @@ void print_dice(int die1_value, int die2_value){
                         printf("  \\/_o__o_/\n");
                         break;
 		case 5:
-						printf("\n   _______\n");
+			printf("\n   _______\n");
                         printf("  /\\ o  o \\\n");
                         printf(" /  \\ o  o \\\n");
                         printf("<  o >------>\n");
@@ -337,7 +337,7 @@ void print_dice(int die1_value, int die2_value){
                         printf("  \\/_o_o_o/\n");
                         break;
 		case 6:
-						printf("\n   _______\n");
+			printf("\n   _______\n");
                         printf("  /\\ o  o \\\n");
                         printf(" /o \\ o  o \\\n");
                         printf("<    >------>\n");
@@ -348,52 +348,52 @@ void print_dice(int die1_value, int die2_value){
 
 	switch(die2_value){
 		case 1:
-						printf("\n    _______\n");
-						printf("  /  o  o /|\n");
-						printf(" /_______/o|\n");
-						printf("|       |oo|\n");
-						printf("|   o   |o/\n");
-						printf("|_______|/\n\n");
-						break;
+			printf("\n    _______\n");
+			printf("  /  o  o /|\n");
+			printf(" /_______/o|\n");
+			printf("|       |oo|\n");
+			printf("|   o   |o/\n");
+			printf("|_______|/\n\n");
+			break;
 		case 2:
-						printf("\n    _______\n");
-						printf("  /  o  o /|\n");
-						printf(" /_______/o|\n");
-						printf("|       |oo|\n");
-						printf("|  o o  |o/\n");
-						printf("|_______|/\n\n");
-						break;
+			printf("\n    _______\n");
+			printf("  /  o  o /|\n");
+			printf(" /_______/o|\n");
+			printf("|       |oo|\n");
+			printf("|  o o  |o/\n");
+			printf("|_______|/\n\n");
+			break;
 		case 3:
-						printf("\n    _______\n");
-						printf("  /  o  o /|\n");
-						printf(" /_______/o|\n");
-						printf("|       |  |\n");
-						printf("| o o o |o/\n");
-						printf("|_______|/\n\n");
-						break;
+			printf("\n    _______\n");
+			printf("  /  o  o /|\n");
+			printf(" /_______/o|\n");
+			printf("|       |  |\n");
+			printf("| o o o |o/\n");
+			printf("|_______|/\n\n");
+			break;
 		case 4:
-						printf("\n    _______\n");
-						printf("  /  o  o /|\n");
-						printf(" /_______/o|\n");
-						printf("|  o  o |  |\n");
-						printf("|  o  o |o/\n");
-						printf("|_______|/\n\n");
-						break;
+			printf("\n    _______\n");
+			printf("  /  o  o /|\n");
+			printf(" /_______/o|\n");
+			printf("|  o  o |  |\n");
+			printf("|  o  o |o/\n");
+			printf("|_______|/\n\n");
+			break;
 		case 5:
-						printf("\n    _______\n");
-						printf("  /  o  o /|\n");
-						printf(" /_______/o|\n");
-						printf("|  o o  |  |\n");
-						printf("|   o   |o/\n");
-						printf("|__o_o__|/\n\n");
-						break;
+			printf("\n    _______\n");
+			printf("  /  o  o /|\n");
+			printf(" /_______/o|\n");
+			printf("|  o o  |  |\n");
+			printf("|   o   |o/\n");
+			printf("|__o_o__|/\n\n");
+			break;
 		case 6:
-						printf("\n    _______\n");
-						printf("  /  o  o /|\n");
-						printf(" /_______/o|\n");
-						printf("| o o o |oo|\n");
-						printf("| o o o |o/\n");
-						printf("|_______|/\n\n");
-						break;
+			printf("\n    _______\n");
+			printf("  /  o  o /|\n");
+			printf(" /_______/o|\n");
+			printf("| o o o |oo|\n");
+			printf("| o o o |o/\n");
+			printf("|_______|/\n\n");
+			break;
 	}
 }
