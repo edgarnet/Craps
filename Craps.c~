@@ -1,0 +1,236 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  Craps.c
+ *
+ *    Description:  This is the source file for 'Craps': the game.
+ *
+ *        Version:  1.0
+ *        Created:  10/1/2016 12:18:29 PM
+ *       Revision:  none
+ *       Compiler:  msft c
+ *
+ *         Author:  Edgar Perez
+ *   Organization:  Washington State University
+ *
+ * =====================================================================================
+ */
+
+#include	"Craps.h"
+
+void print_game_rules(void){
+	printf("Each game has two phases: Come Out and Point. To start a round, the shooter makes one or more\n"
+		"Come Out rolls. A Come Out roll of 2, 3 or 12 (called Craps, the shooter is said to 'crap out') ends the\n"
+		"round with players losing their Pass Line bets. A Come Out roll of 7 or 11 (a Natural) results in a win\n"
+		"for Pass Line bets. The shooter continues to make Come Out rolls until he rolls 4, 5, 6, 8, 9, or 10,\n"
+		"which number becomes the Point. The dealer then moves an On button to the point number signifying\n"
+		"the second phase of the round. If the shooter rolls the point number, the result is a win for bets on the\n"
+		"Pass Line. If the shooter rolls a seven (a Seven-out), the pass line loses and the round ends.\n"
+		"- Bone Bash Houston\n");
+}
+
+double get_bank_balance(void){
+	double balance = 0.0;
+	printf("Please enter your balance for tonight: ");
+	scanf("%lf", &balance);	
+	return balance;
+}
+
+double get_wager_amount(void){
+	double wager = 0.0;
+	printf("How much will you wager?\n");
+	scanf("%lf", &wager);
+	return wager;
+}
+
+int check_wager_amount(double wager, double balance){
+	while((balance - wager) < 0){
+		printf("C'mon, dont play yourself like that.\n");
+		wager = get_wager_amount();
+		system("cls");
+	}
+	return ((balance - wager) > 0);
+}
+
+int roll_die(void){
+	return (rand() % 6 + 1);
+}
+
+int calculate_sum_dice(int die1_value, int die2_value){
+	print_dice(die1_value, die2_value);
+	return (die1_value + die2_value);
+}
+
+int is_win_loss_or_point(int sum_dice){
+	if(sum_dice == 7 || sum_dice == 11)
+		return WIN;
+	else if(sum_dice == 2 || sum_dice == 3 || sum_dice == 12)
+		return LOSS;
+	else
+		return POINT;
+}
+
+int is_point(int sum_dice, int count){
+	int die1 = 0;
+	int die2 = 0;
+	if(is_win_loss_or_point(sum_dice) == POINT){
+		printf("\nWe've got ourselves a point!\n");
+		die1 = roll_die();
+		die2 = roll_die();
+		count += 2;
+		if(sum_dice == calculate_sum_dice(die1, die2))
+			return WIN;
+		else
+			return LOSS;
+	}
+	else
+		return is_win_loss_or_point(sum_dice);
+}
+
+double adjust_bank_balance(double bank_balance, double wager_amount, int add_or_subtract){
+	if(add_or_subtract == WIN)
+		return (bank_balance + (wager_amount * 2));
+	else if(add_or_subtract == LOSS)
+		return (bank_balance - wager_amount);
+	else
+		return bank_balance;
+}
+
+void chatter_messages(int number_rolls, int win_loss_neither, double initial_bank_balance, double current_bank_balance){
+	printf("Number of Rolls: %d, Initial Balance: %d, Current Balance: %d\n\n",
+			number_rolls, initial_bank_balance, current_bank_balance);
+	if(win_loss_neither == WIN){
+		switch(rand() % 5 + 1){
+			case 1:
+				printf("You might just walk out with the vault with that kinda luck!\n\n");
+			case 2:
+				printf("Now, now, we gotta start sharing that bread with the rest of the table.\n\n");
+			case 3:
+				printf("You ever heard of Icarus? 'Cause I think you might be flyin' a little too high.\n\n");
+			case 4:
+				printf("You're gonna take all the reservation's money with that sorta skill!\n\n");
+			case 5:
+				printf("I'll have to start bringin' the manager over if you keep winnin' like this.\n\n");
+		}
+	}
+	else if(win_loss_neither == LOSS){
+		switch(rand() % 5 + 1){
+			case 1:
+				printf("Hey buddy, sooner than later we're gonna have to let someone else be the shooter.\n\n");
+			case 2:
+				printf("I'd start keepin' an eye on my balance if I were you.\n\n");
+			case 3:
+				printf("Maybe you should grab a drink and come back refreshed.\n\n");
+			case 4:
+				printf("I hear your spouse isn't too fond of your gambling addiction.\n\n");
+			case 5:
+				printf("Why don't you play this on your iPhone and come back when you know a thing or two!\n\n");
+		}
+	}
+	else
+		printf("Hey pal I don't have all night!\n\n");
+}
+
+void print_dice(int die1_value, int die2_value){
+	switch(die1_value){
+		case 1: 
+			printf("   _______\n");
+			printf("  /\\ o  o \\\n");
+			printf(" /o \\ o  o \\");
+			printf("<    >------>");
+			printf(" \\ o/  o   /");
+			printf("  \\/______/");
+			break;
+		case 2:
+			printf("   _______\n");
+			printf("  /\\ o o o\\\n");
+                        printf(" /o \\ o o o\\");
+                        printf("<  o >------>");
+                        printf(" \\ o/ o  o /");
+                        printf("  \\/______/");
+                        break;
+		case 3:
+			printf("   _______\n");
+                        printf("  /\\ o o o\\\n");
+                        printf(" /  \\ o  o \\");
+                        printf("<  o >------>");
+                        printf(" \\  /o o o /");
+                        printf("  \\/______/");
+                        break;
+		case 4:
+			printf("   _______\n");
+                        printf("  /\\ o o o\\\n");
+                        printf(" /o \\ o o o\\");
+                        printf("<    >------>");
+                        printf(" \\ o/ o  o /");
+                        printf("  \\/_o__o_/");
+                        break;
+		case 5:
+			printf("   _______\n");
+                        printf("  /\\ o   o\\\n");
+                        printf(" /  \\ o   o\\");
+                        printf("<  o >------>");
+                        printf(" \\  / o  o /");
+                        printf("  \\/_o_o_o/");
+                        break;
+		case 6:
+			printf("   _______\n");
+                        printf("  /\\      \\\n");
+                        printf(" /o \\ o o o\\");
+                        printf("<    >------>");
+                        printf(" \\ o/ o o o/");
+                        printf("  \\/_o_o_o/");
+                        break;
+	}
+
+	switch(die2_value){
+		case 1:
+			printf("_______\n");
+			printf("   o /|\n");
+			printf("_____/o|\n");
+			printf("     |oo|\n");
+			printf("        |   o   |o/\n");
+			printf("        |_______|/\n");
+			break;
+		case 2:
+			printf("_______\n");
+                        printf("   o /|\n");
+			printf("_____/o|\n");
+                        printf("     |oo|\n");
+                        printf("        |  o o  |o/\n");
+                        printf("        |_______|/\n");
+                        break;
+		case 3:
+			printf("_______\n");
+                        printf("   o /|\n");
+                        printf("_____/o|\n");
+                        printf("     |oo|\n");
+                        printf("        | o o o |o/\n");
+                        printf("        |_______|/\n");
+                        break;
+		case 4:
+			printf("_______\n");
+                        printf("   o /|\n");
+                        printf("_____/o|\n");
+                        printf("o  o |oo|\n");
+                        printf("        |       |o/\n");
+                        printf("        |__o__o_|/\n");
+                        break;
+		case 5:
+			printf("_______\n");
+                        printf("   o /|\n");
+                        printf("_____/o|\n");
+                        printf("o o  |oo|\n");
+                        printf("        |   o   |o/\n");
+                        printf("        |__o_o__|/\n");
+                        break;
+		case 6:
+			printf("_______\n");
+                        printf("   o /|\n");
+                        printf("_____/o|\n");
+                        printf("     |oo|\n");
+                        printf("        | o o o |o/\n");
+                        printf("        |_o_o_o_|/\n");
+                        break;
+	}
+}

@@ -1,0 +1,78 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  Main.c
+ *
+ *    Description:  The driver file for 'Craps': the game.
+ *
+ *        Version:  1.0
+ *        Created:  10/1/2016 12:15:50 PM
+ *       Revision:  none
+ *       Compiler:  msft c
+ *
+ *         Author:  Edgar Perez
+ *   Organization:  Washington State University
+ *
+ * =====================================================================================
+ */
+
+#include	"Craps.h"
+
+int main(void){
+	srand((unsigned int) time(NULL));
+	int option = 0;
+	int dieOne = 0;
+	int dieTwo = 0;
+	int initial_balance = 0;
+	int current_balance = 0;
+	int current_wager = 0;
+	int roll_count = 0;
+	int win_lose = 0;
+	char answer = 0;
+	int complete = 0;
+	do{
+		printf("1. Print game rules\n");
+		printf("2. Play game\n");
+		printf("3. Exit game\n");
+		scanf("%d", &option);
+		switch(option){
+			case 1:
+				print_game_rules();
+				break;
+			case 2:
+				initial_balance = get_bank_balance();
+				current_balance = initial_balance;
+				while(complete != TRUE){
+					current_wager = get_wager_amount();
+					check_wager_amount(current_balance, current_wager);
+					dieOne = roll_die();
+					dieTwo = roll_die();
+					roll_count += 2;
+					win_lose = is_point((calculate_sum_dice(dieOne, dieTwo)), roll_count);
+					current_balance = adjust_bank_balance(current_balance, current_wager, win_lose);
+					chatter_messages(roll_count, win_lose, initial_balance, current_balance);
+					if(current_balance > 0){
+						printf("Do you still wanna play? (y/n): ");
+						scanf("%c", answer);
+						switch(answer){
+							case 'y':
+								complete = FALSE;
+							case 'n':
+								complete = TRUE;
+							default:
+								complete = FALSE;
+						}		
+					}
+					else{
+						printf("Thanks sonny, but your empty balance won't do you any good here.");
+						complete = TRUE;
+					}
+			case 3:
+				printf("Thank you for playing 'Craps'!");
+				exit(0);
+			default:
+				system("cls");
+			}
+		}
+	} while ((option > 1) && (option < 3));
+}
